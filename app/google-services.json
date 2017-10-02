@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "1034818051246",
+    "firebase_url": "https://aprendeperuaapp.firebaseio.com",
+    "project_id": "aprendeperuaapp",
+    "storage_bucket": "aprendeperuaapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1034818051246:android:9135470593ab0130",
+        "android_client_info": {
+          "package_name": "com.example.samuel.aprendeperu"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1034818051246-eenrajcen2uilnll0038r7c8oo3k3l4a.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.samuel.aprendeperu",
+            "certificate_hash": "897279bb29e20a5620cec33830562d7a0c6a19da"
+          }
+        },
+        {
+          "client_id": "1034818051246-jleh7eu3b8drfd60ic73ngqiiq5avjrr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDLRsZPZhOjYO94FNl4sj4B_lrtjA8f9To"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1034818051246-jleh7eu3b8drfd60ic73ngqiiq5avjrr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
