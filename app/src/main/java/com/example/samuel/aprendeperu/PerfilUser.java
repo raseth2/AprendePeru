@@ -105,23 +105,24 @@ private void regsitro(){
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.perfil_user);
+
+
         mAuth = FirebaseAuth.getInstance();
 
-        tNombres=(EditText)findViewById(R.id.txtNombres);
-        tApellidos=(EditText)findViewById(R.id.txtApellidosPer);
-        tTelefono=(EditText)findViewById(R.id.txtTelefonoPer);
+        tNombres=(EditText)findViewById(R.id.txtInsttitucionEducativa);
+        tApellidos=(EditText)findViewById(R.id.txtProfesion);
+        tTelefono=(EditText)findViewById(R.id.txtLugarTrabajo);
         tEmail=(EditText)findViewById(R.id.txtEmailPer);
         tFechaNacimiento=(EditText)findViewById(R.id.txtFechaNac);
         tDireccion=(EditText)findViewById(R.id.txtDireccion);
 
 
-        textView=(TextView)findViewById(R.id.textView4);
+        textView=(TextView)findViewById(R.id.txtViewCurriculum);
 
         btn_next = (Button)findViewById(R.id.btn_next);
 
-        spTipoPersona =(Spinner)findViewById(R.id.spTipoPersona);
+        spTipoPersona =(Spinner)findViewById(R.id.spEstudios);
         //spinner lista
 
 
@@ -132,10 +133,7 @@ private void regsitro(){
             @Override
             public void onClick(View v) {
                 regsitro();
-
-
-
-               startActivity(new Intent(getApplicationContext(),Curriculun.class));
+                startActivity(new Intent(getApplicationContext(),Curriculun.class));
             }
         });
 
