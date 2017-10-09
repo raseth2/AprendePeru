@@ -18,8 +18,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".User"/>
-        <activity android:name="configuracion1"/>
-        <activity android:name="configuracion2"/>
+        <activity android:name=".PerfilUser"/>
+        <activity android:name=".Curriculun"/>
         <activity android:name="NewUser"/>
     </application>
 

@@ -61,7 +61,7 @@ public class User extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(),
                         "Abrir nuevo perfil", Toast.LENGTH_SHORT).show();
 
-                startActivity(new Intent(getApplicationContext(),configuracion1.class));
+                startActivity(new Intent(getApplicationContext(),PerfilUser.class));
             }
         });
 

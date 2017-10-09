@@ -1,5 +1,6 @@
 package com.example.samuel.aprendeperu;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -27,7 +28,7 @@ public class NewUser extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.fragement_new_user);
+        setContentView(R.layout.new_user);
 
         mAuth = FirebaseAuth.getInstance(); // importamos la llamada
 
@@ -58,8 +59,8 @@ public class NewUser extends AppCompatActivity {
         if(user != null)
         {
             UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
-                    .setDisplayName(name.getText().toString().trim())
-//.setPhotoUri(Uri.parse("https://example.com/jane-q-user/profile.jpg")) // here you can set image link also.
+                        .setDisplayName(name.getText().toString().trim())
+                        .setPhotoUri(Uri.parse("https://example.com/jane-q-user/profile.jpg")) // here you can set image link also.
                     .build();
 
             user.updateProfile(profileUpdates)
