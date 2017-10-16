@@ -34,7 +34,7 @@ public class NewUser extends AppCompatActivity {
 
         btnRegister = (Button)findViewById(R.id.btn_registrar);
         email = (EditText)findViewById(R.id.txtCorreo);
-        apellido=(EditText)findViewById(R.id.txtApellido);
+       // apellido=(EditText)findViewById(R.id.txtApellido);
         password = (EditText)findViewById(R.id.txtContraseña);
         name = (EditText)findViewById(R.id.txtNombre);
 
