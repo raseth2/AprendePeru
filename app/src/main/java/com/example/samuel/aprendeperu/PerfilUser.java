@@ -28,10 +28,8 @@ public class PerfilUser extends AppCompatActivity {
     private FirebaseAuth mAuth;
 
     //declaraciones de herramientas
-
     Button btn_next ;
     EditText txtopcion,tNombres,tApellidos,tDireccion,tEmail,tFechaNacimiento,tTelefono;
-
     Spinner spTipoPersona;
     TextView textView;
     // declaracion de variables
@@ -54,9 +52,8 @@ private void regsitro(){
 
     String tipoPerson = tipoPersona.toString();
 
-
     refidUsuario.setValue(user.getUid());
-    refnombrePersona.setValue(user.getDisplayName());
+    refnombrePersona.setValue(tNombres.getText().toString());
     refapellidoPersona.setValue(tApellidos.getText().toString());
     reftelefonoPersona.setValue(tTelefono.getText().toString());
     refemailPersona.setValue(user.getEmail());
@@ -68,10 +65,6 @@ private void regsitro(){
    // txtopcion.setText("");
 
 }
-
-
-
-
     //referencia base de datos firebase1
     private void Spiner(){
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item,datos);
@@ -107,7 +100,6 @@ private void regsitro(){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.perfil_user);
 
-
         mAuth = FirebaseAuth.getInstance();
 
         tNombres=(EditText)findViewById(R.id.txtInsttitucionEducativa);
@@ -119,16 +111,10 @@ private void regsitro(){
 
 
         textView=(TextView)findViewById(R.id.txtViewCurriculum);
-
         btn_next = (Button)findViewById(R.id.btn_next);
-
         spTipoPersona =(Spinner)findViewById(R.id.spEstudios);
         //spinner lista
-
-
-
         Spiner();
-
         btn_next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -142,13 +128,10 @@ private void regsitro(){
     @Override
     protected void onStart() {
         super.onStart();
-
         FirebaseUser users = mAuth.getCurrentUser();
         //ver un dato o actualizar la pantalla
         DatabaseReference refnombrePersona = ref.child("Persona").child(users.getUid()).child("NombrePersona");
-
         if (users != null) {
-
             tNombres.setText(users.getDisplayName());
             tEmail.setText(users.getEmail());
         }
@@ -159,7 +142,6 @@ private void regsitro(){
                 String value = dataSnapshot.getValue(String.class);
                 tNombres.setText(value);
             }
-
             @Override
             public void onCancelled(DatabaseError databaseError) {
 

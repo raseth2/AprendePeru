@@ -1,163 +1,157 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <TextView
-        android:id="@+id/txtViewCurriculum"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginTop="20dp"
-        android:text="¡Bienvenido!"
-        android:textSize="24sp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp" />
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginTop="8dp"
-        android:text="Dime como quieres utilizar aprende.pe"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtViewCurriculum"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp" />
 
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginTop="8dp"
-        android:text="Quiero..."
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp" />
+    <LinearLayout
+        android:id="@+id/linear1"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
 
-    <Button
-        android:onClick="next1"
-        android:id="@+id/btn_next"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Continuar"
-        android:layout_marginLeft="8dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginStart="250dp"
-        app:layout_constraintHorizontal_bias="0.97"
-        android:layout_marginTop="274dp"
-        app:layout_constraintTop_toBottomOf="@+id/txtInsttitucionEducativa" />
+        android:cropToPadding="true"
+        android:background="@color/bg_login"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true">
+        <ImageView
+
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/logo"
+            />
+
+        <TextView
+            android:id="@+id/tvLogin"
+            android:text="Cuentanos Sobre ti"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:paddingBottom="20dp"
+            android:paddingLeft="20dp"
+            android:textColor="@color/white"
+            android:textSize="25dp"
+            android:textStyle="bold|italic"
+            />
+    </LinearLayout>
+
+
+
+    <LinearLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingTop="16dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true">
+        <TextView
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+
+            android:paddingLeft="20dp"
+            android:textColor="@color/bg_login"
+            android:textStyle="bold|italic"
+            android:id="@+id/txtViewCurriculum"
+            android:text="¡Bienvenido!"
+            android:textSize="24sp"
+            />
+
+
+
 
     <EditText
         android:id="@+id/txtInsttitucionEducativa"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:ems="10"
         android:hint="Nombres "
-        android:inputType="textPersonName"
-        app:layout_constraintHorizontal_bias="0.503"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spEstudios" />
-
-    <Spinner
-        android:id="@+id/spEstudios"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginTop="35dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3" />
-
-    <EditText
-        android:id="@+id/txtProfesion"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="Apellidos"
         android:inputType="textPersonName"
-        android:layout_marginTop="7dp"
-        app:layout_constraintTop_toBottomOf="@+id/txtInsttitucionEducativa"
-        android:layout_marginRight="8dp"
-        app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginLeft="8dp"
-        app:layout_constraintLeft_toLeftOf="parent" />
+        android:layout_marginBottom="10dp"
+        android:padding="10dp"
+        android:singleLine="true"
 
-    <EditText
+       />
+        <EditText
+            android:id="@+id/txtProfesion"
+            android:hint="Apellidos"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:layout_marginBottom="10dp"
+            android:padding="10dp"
+            android:singleLine="true"
+            />
+
+        <Spinner
+            android:id="@+id/spEstudios"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:padding="5dp"
+            />
+
+
+        <EditText
         android:id="@+id/txtLugarTrabajo"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="Telefono"
         android:inputType="textPersonName"
-        android:layout_marginTop="8dp"
-        app:layout_constraintTop_toBottomOf="@+id/txtProfesion"
-        android:layout_marginRight="8dp"
-        app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginLeft="8dp"
-        app:layout_constraintLeft_toLeftOf="parent" />
+        android:layout_marginBottom="10dp"
+        android:padding="10dp"
+        android:singleLine="true"
+        android:hint="Telefono"
+        />
 
     <EditText
         android:id="@+id/txtEmailPer"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
         android:hint="Email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:inputType="textPersonName"
-        android:layout_marginTop="7dp"
-        app:layout_constraintTop_toBottomOf="@+id/txtLugarTrabajo"
-        android:layout_marginRight="8dp"
-        app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginLeft="8dp"
-        app:layout_constraintLeft_toLeftOf="parent" />
+        android:layout_marginBottom="10dp"
+        android:padding="10dp"
+        android:singleLine="true"/>
 
     <EditText
         android:id="@+id/txtFechaNac"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
         android:hint="Fecha de Nacimiento"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:inputType="textPersonName"
-        android:layout_marginTop="2dp"
-        app:layout_constraintTop_toBottomOf="@+id/txtEmailPer"
-        android:layout_marginRight="8dp"
-        app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginLeft="8dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintHorizontal_bias="0.503" />
+        android:layout_marginBottom="10dp"
+        android:padding="10dp"
+        android:singleLine="true" />
 
     <EditText
         android:id="@+id/txtDireccion"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
         android:hint="Direccion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:inputType="textPersonName"
-        android:layout_marginTop="7dp"
-        app:layout_constraintTop_toBottomOf="@+id/txtFechaNac"
-        android:layout_marginRight="8dp"
-        app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginLeft="8dp"
-        app:layout_constraintLeft_toLeftOf="parent" />
+        android:layout_marginBottom="10dp"
+        android:padding="10dp"
+        android:singleLine="true"/>
 
+        <Button
+            android:onClick="next1"
+            android:id="@+id/btn_next"
+            android:text="Continuar"
+            android:layout_marginTop="10dip"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textColor="@color/white"
+            android:background="@color/bg_login"
+            />
 
-</android.support.constraint.ConstraintLayout>
+    </LinearLayout>
+</LinearLayout>

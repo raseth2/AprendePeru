@@ -87,12 +87,12 @@ public class NewUser extends AppCompatActivity {
                         Log.d("TESTING", "Sign up Successful" + task.isSuccessful());
 
                         if (!task.isSuccessful()) {
-                            Toast.makeText(NewUser.this, "Signed up Failed", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(NewUser.this, "Ya tiene una Cuenta", Toast.LENGTH_SHORT).show();
                         }
                         else
                         {
                             userProfile();
-                            Toast.makeText(NewUser.this, "Created Account", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(NewUser.this, "Cuenta Creada", Toast.LENGTH_SHORT).show();
                             Log.d("TESTING", "Created Account");
                         }
                     }

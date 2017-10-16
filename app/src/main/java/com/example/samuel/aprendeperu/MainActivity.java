@@ -15,7 +15,6 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
-
 public class MainActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private EditText email,password,name,apellido;
@@ -43,7 +42,6 @@ public class MainActivity extends AppCompatActivity {
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-
                 if(firebaseAuth.getCurrentUser()!=null){
 
                     startActivity(new Intent(MainActivity.this,User.class));
@@ -51,7 +49,6 @@ public class MainActivity extends AppCompatActivity {
                 }
                 else {
                     // Toast.makeText(MainActivity.this, "Datos Incorrectos", Toast.LENGTH_SHORT).show();
-
                 }
             }
         };
@@ -66,24 +63,17 @@ public class MainActivity extends AppCompatActivity {
         btnInicioS.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 String getemail = email.getText().toString().trim();
                 String getepassword = password.getText().toString().trim();
                 IniciarSesion(getemail,getepassword);
-
             }
         });
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getApplicationContext(),NewUser.class));
-
             }
         });
-
-
-
-
     }
     //Create Account
     /*private void CrearUser(String email, String password) {
@@ -131,18 +121,14 @@ public class MainActivity extends AppCompatActivity {
                     });
         }
     }*/
-
-
     //Now start Sign In Process
 //SignIn Process
     private void IniciarSesion(String email, String password) {
-
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         Log.d("TESTING", "sign In Successful:" + task.isSuccessful());
-
 // If sign in fails, display a message to the user. If sign in succeeds
 // the auth state listener will be notified and logic to handle the
 // signed in user can be handled in the listener.
@@ -157,6 +143,5 @@ public class MainActivity extends AppCompatActivity {
                         }
                     }
                 });
-
     }
 }
