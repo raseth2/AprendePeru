@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 if(firebaseAuth.getCurrentUser()!=null){
 
-                    startActivity(new Intent(MainActivity.this,User.class));
+                    startActivity(new Intent(MainActivity.this,Main2Activity.class));
 
                 }
                 else {
@@ -137,7 +137,7 @@ public class MainActivity extends AppCompatActivity {
                             Toast.makeText(MainActivity.this, "Failed", Toast.LENGTH_SHORT).show();
                         }
                         else {
-                            Intent i = new Intent(MainActivity.this, User.class);
+                            Intent i = new Intent(MainActivity.this, Main2Activity.class);
                             finish();
                             startActivity(i);
                         }

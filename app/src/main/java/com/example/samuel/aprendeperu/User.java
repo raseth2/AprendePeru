@@ -17,6 +17,7 @@ import com.google.firebase.auth.FirebaseUser;
  */
 
 public class User extends AppCompatActivity {
+
     Button btnCerrarSession,btn_perfil, upload_bttn,showData,notification;
     private FirebaseAuth mAuth;
     TextView username;
@@ -24,7 +25,6 @@ public class User extends AppCompatActivity {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.user);
-
         mAuth = FirebaseAuth.getInstance(); // important Call
         btnCerrarSession = (Button)findViewById(R.id.btn_cerrarSesion);
         btn_perfil = (Button)findViewById(R.id.btn_perfil);

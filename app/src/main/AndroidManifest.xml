@@ -22,7 +22,11 @@
         <activity android:name=".PerfilUser" />
         <activity android:name=".Curriculun" />
         <activity android:name=".NewUser" />
-        <activity android:name=".ClasesDocente"></activity>
+        <activity android:name=".ClasesDocente" />
+        <activity
+            android:name=".Main2Activity"
+            android:label="@string/title_activity_main2"
+            android:theme="@style/AppTheme"></activity>
     </application>
 
 </manifest>
