@@ -140,7 +140,7 @@ private void regsitro(){
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 String value = dataSnapshot.getValue(String.class);
-                tNombres.setText(value);
+                //tNombres.setText(value);
             }
             @Override
             public void onCancelled(DatabaseError databaseError) {

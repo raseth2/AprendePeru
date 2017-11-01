@@ -14,10 +14,29 @@
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
             android:background="@color/bg_login"
+            android:layout_height="?attr/actionBarSize"
             android:theme="@style/AppTheme"
-            app:popupTheme="@style/AppTheme.PopupOverlay" />
+            app:popupTheme="@style/AppTheme.PopupOverlay" >
+            <ImageView
+
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/logo"
+                />
+
+            <TextView
+                android:id="@+id/tvLogin"
+                android:text="Aprende Perú"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:paddingLeft="30dp"
+                android:textColor="@color/white"
+                android:textSize="25dp"
+                android:textStyle="bold|italic"
+                />
+        </android.support.v7.widget.Toolbar>
 
     </android.support.design.widget.AppBarLayout>
 

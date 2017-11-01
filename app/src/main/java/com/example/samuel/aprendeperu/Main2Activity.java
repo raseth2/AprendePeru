@@ -15,16 +15,54 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.samuel.aprendeperu.Fragment.ClasesFragment;
 import com.example.samuel.aprendeperu.Fragment.PerfilFragment;
+import com.example.samuel.aprendeperu.Fragment.ViewPerfilFragment;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class Main2Activity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-    private View view;
     private FirebaseAuth mAuth;
+
+    DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
+
+    public void StartActivity(){
+        FirebaseUser user = mAuth.getCurrentUser();
+        DatabaseReference refnombrePersona = ref.child("Persona").child(user.getUid());
+        //tabla PErsona
+        refnombrePersona.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+                try {
+                    if (snapshot.getValue() == null){
+                        startActivity(new Intent(Main2Activity.this,PerfilUser.class));
+                        Toast.makeText(Main2Activity.this, snapshot.getValue().toString(), Toast.LENGTH_SHORT).show();
+                    }
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        //fin tablapersona
+    });
+    }
+    protected void onStart() {
+        super.onStart();
+        StartActivity();
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,7 +107,10 @@ public class Main2Activity extends AppCompatActivity
           if (user != null) {
             userTview.setText(user.getDisplayName());
               correoTview.setText(user.getEmail());
-            }
+            }else{
+              userTview.setText("Usuario");
+              correoTview.setText("Correo");
+          }
 
         navigationView.setNavigationItemSelectedListener(this);
 
@@ -118,7 +159,7 @@ public class Main2Activity extends AppCompatActivity
 
         if (id == R.id.nav_perfil) {
             // Handle the camera action
-            fragmentManager.beginTransaction().replace(R.id.contenedor, new PerfilFragment()).commit();
+            fragmentManager.beginTransaction().replace(R.id.contenedor, new ViewPerfilFragment()).commit();
 
         } else if (id == R.id.nav_clases) {
             fragmentManager.beginTransaction().replace(R.id.contenedor, new ClasesFragment()).commit();

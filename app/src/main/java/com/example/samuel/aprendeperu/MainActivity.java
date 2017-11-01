@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
 
                 }
                 else {
-                    // Toast.makeText(MainActivity.this, "Datos Incorrectos", Toast.LENGTH_SHORT).show();
+                   //  Toast.makeText(MainActivity.this, "Datos Incorrectos", Toast.LENGTH_SHORT).show();
                 }
             }
         };
@@ -65,8 +65,20 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String getemail = email.getText().toString().trim();
                 String getepassword = password.getText().toString().trim();
-                IniciarSesion(getemail,getepassword);
-            }
+                if (password.getText().toString().isEmpty() || email.getText().toString().isEmpty() ) {
+                    Toast.makeText(MainActivity.this, "Ingresar Ususario y contraseña ", Toast.LENGTH_SHORT).show();
+                }
+                    else{
+                        try {
+                            IniciarSesion(getemail,getepassword);
+                        } catch (Exception e){
+                            e.printStackTrace();
+                        }
+                    }
+                }
+
+
+
         });
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -134,7 +146,7 @@ public class MainActivity extends AppCompatActivity {
 // signed in user can be handled in the listener.
                         if (!task.isSuccessful()) {
                             Log.w("TESTING", "signInWithEmail:failed", task.getException());
-                            Toast.makeText(MainActivity.this, "Failed", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(MainActivity.this, "Vuelva a Intentarlo", Toast.LENGTH_SHORT).show();
                         }
                         else {
                             Intent i = new Intent(MainActivity.this, Main2Activity.class);
