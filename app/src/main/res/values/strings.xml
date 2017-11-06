@@ -11,4 +11,12 @@
     <string name="action_settings">Settings</string>
     <string name="userView">Usuario</string>
     <string name="correoView">Correo</string>
+
+    <string-array name="entradas_categoria">
+        <item>Artes</item>
+        <item>Numeros</item>
+        <item>Musica</item>
+        <item>Deportes</item>
+        <item>Otros</item>
+    </string-array>
 </resources>
