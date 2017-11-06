@@ -9,6 +9,36 @@
     android:fitsSystemWindows="true"
     tools:openDrawer="start">
 
+    <TextView
+        android:id="@+id/tv_no_movies"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="No Movies Available Please Enter your fav movie by
+clicking + button"
+        android:textAlignment="center"
+        android:textSize="18sp"/>
+    <FrameLayout
+        android:id="@+id/frame_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/my_recycler_view"
+            android:paddingTop="80dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbars="vertical" />
+        </LinearLayout>
+        </ScrollView>
+    </FrameLayout>
     <include
         layout="@layout/app_bar_main2"
         android:layout_width="match_parent"
@@ -22,5 +52,6 @@
         android:fitsSystemWindows="true"
         app:headerLayout="@layout/nav_header_main2"
         app:menu="@menu/activity_main2_drawer" />
+
 
 </android.support.v4.widget.DrawerLayout>

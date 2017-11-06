@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentManager;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -14,12 +16,18 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.animation.Animation;
+import android.view.animation.ScaleAnimation;
+import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.samuel.aprendeperu.Fragment.ClasesFragment;
 import com.example.samuel.aprendeperu.Fragment.PerfilFragment;
 import com.example.samuel.aprendeperu.Fragment.ViewPerfilFragment;
+import com.example.samuel.aprendeperu.Referencias.Clases;
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -27,10 +35,17 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
 public class Main2Activity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     private FirebaseAuth mAuth;
+    ScaleAnimation shrinkAnim;
+    private RecyclerView mRecyclerView;
+    private StaggeredGridLayoutManager mLayoutManager;
+    private TextView tvNoMovies;
+    FirebaseDatabase database = FirebaseDatabase.getInstance();
+    DatabaseReference mDatabaseReference = database.getReference();
 
     DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
 
@@ -70,9 +85,50 @@ public class Main2Activity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        mAuth = FirebaseAuth.getInstance(); // important Call
+        //FirebaseUser user = mAuth.getCurrentUser();
 
+        mRecyclerView = (RecyclerView)
+                findViewById(R.id.my_recycler_view);
+        tvNoMovies = (TextView) findViewById(R.id.tv_no_movies);
+//scale animation to shrink floating actionbar
+        /*shrinkAnim = new ScaleAnimation(1.15f, 0f, 1.15f, 0f,
+                Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF,
+                0.5f);*/
+        if (mRecyclerView != null) {
+//to enable optimization of recyclerview
+            mRecyclerView.setHasFixedSize(true);
+        }
+        //using staggered grid pattern in recyclerview
+        mLayoutManager = new StaggeredGridLayoutManager(1,StaggeredGridLayoutManager.VERTICAL);
+        mRecyclerView.setLayoutManager(mLayoutManager);
+//Say Hello to our new FirebaseUI android Element, i.e., FirebaseRecyclerAdapter
+        mAuth = FirebaseAuth.getInstance();
         FirebaseUser user = mAuth.getCurrentUser();
+
+
+        FirebaseRecyclerAdapter<Clases,MovieViewHolder> adapter = new
+                FirebaseRecyclerAdapter<Clases, MovieViewHolder>(
+                        Clases.class,
+                        R.layout.card_view_main2,
+                        MovieViewHolder.class,
+
+                        mDatabaseReference.child("Clases").child("Artes").getRef()
+
+                ) {
+                    @Override
+
+                    protected void populateViewHolder(MovieViewHolder viewHolder, Clases
+                            model, int position) {
+/*                        if(tvNoMovies.getVisibility()== View.VISIBLE){
+                            tvNoMovies.setVisibility(View.GONE);
+                        }*/
+                        viewHolder.tvMovieName.setText(model.getAsignatura());
+                        //viewHolder.ratingBar.setRating(model.get());
+                       // Picasso.with(Main2Activity.this).load(model.get()).into(viewHolder.ivMoviePoster);
+                    }
+                };
+        mRecyclerView.setAdapter(adapter);
+
 
         if(mAuth.getCurrentUser() == null)
         {
@@ -116,6 +172,19 @@ public class Main2Activity extends AppCompatActivity
 
         /*FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.contenedor, new ImportFragment()).commit();*/
+    }
+    public static class MovieViewHolder extends RecyclerView.ViewHolder{
+
+        TextView tvMovieName;
+        RatingBar ratingBar;
+        ImageView ivMoviePoster;
+        public MovieViewHolder(View v) {
+            super(v);
+            tvMovieName = (TextView) v.findViewById(R.id.tv_name);
+            ratingBar = (RatingBar) v.findViewById(R.id.rating_bar);
+            ivMoviePoster = (ImageView) v.findViewById(R.id.iv_movie_poster);
+        }
+
     }
 
     @Override
@@ -163,6 +232,7 @@ public class Main2Activity extends AppCompatActivity
 
         } else if (id == R.id.nav_clases) {
             fragmentManager.beginTransaction().replace(R.id.contenedor, new ClasesFragment()).commit();
+
 
         } else if (id == R.id.nav_slideshow) {
             //fragmentManager.beginTransaction().replace(R.id.contenedor, new SlideshowFragment()).commit();
