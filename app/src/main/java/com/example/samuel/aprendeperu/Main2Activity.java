@@ -16,7 +16,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.animation.Animation;
 import android.view.animation.ScaleAnimation;
 import android.widget.ImageView;
 import android.widget.RatingBar;
@@ -24,7 +23,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.samuel.aprendeperu.Fragment.ClasesFragment;
-import com.example.samuel.aprendeperu.Fragment.PerfilFragment;
 import com.example.samuel.aprendeperu.Fragment.ViewPerfilFragment;
 import com.example.samuel.aprendeperu.Referencias.Clases;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
@@ -35,7 +33,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.squareup.picasso.Picasso;
 
 public class Main2Activity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -122,7 +119,9 @@ public class Main2Activity extends AppCompatActivity
 /*                        if(tvNoMovies.getVisibility()== View.VISIBLE){
                             tvNoMovies.setVisibility(View.GONE);
                         }*/
-                        viewHolder.tvMovieName.setText(model.getAsignatura());
+                        viewHolder.tViewAsignatura.setText(model.getAsignatura());
+                        viewHolder.tViewCosto.setText("Precio : "+model.getCosto()+" S/.");
+
                         //viewHolder.ratingBar.setRating(model.get());
                        // Picasso.with(Main2Activity.this).load(model.get()).into(viewHolder.ivMoviePoster);
                     }
@@ -175,12 +174,13 @@ public class Main2Activity extends AppCompatActivity
     }
     public static class MovieViewHolder extends RecyclerView.ViewHolder{
 
-        TextView tvMovieName;
+        TextView tViewAsignatura,tViewCosto;
         RatingBar ratingBar;
         ImageView ivMoviePoster;
         public MovieViewHolder(View v) {
             super(v);
-            tvMovieName = (TextView) v.findViewById(R.id.tv_name);
+            tViewAsignatura = (TextView) v.findViewById(R.id.tViewAsignatura);
+            tViewCosto = (TextView) v.findViewById(R.id.tViewCosto);
             ratingBar = (RatingBar) v.findViewById(R.id.rating_bar);
             ivMoviePoster = (ImageView) v.findViewById(R.id.iv_movie_poster);
         }

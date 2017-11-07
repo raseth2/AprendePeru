@@ -150,7 +150,7 @@ btn_save=(Button)inflate.findViewById(R.id.btnGuardar);
             }
         });
 
-        fecha_text = (TextView) inflate.findViewById(R.id.fecha_ejemplo_text);
+      /*  fecha_text = (TextView) inflate.findViewById(R.id.fecha_ejemplo_text);
 
         fecha_text.setOnClickListener(
                 new View.OnClickListener() {
@@ -161,7 +161,7 @@ btn_save=(Button)inflate.findViewById(R.id.btnGuardar);
 
                     }
                 }
-        );
+        );*/
         // Inflate the layout for this fragment
         return inflate;
     }
