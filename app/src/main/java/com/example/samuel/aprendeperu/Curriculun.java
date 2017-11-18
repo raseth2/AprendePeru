@@ -141,7 +141,7 @@ public class Curriculun extends Activity {
             public void onClick(View v) {
                 regsitroCurriculum();
 
-                //startActivity(new Intent(getApplicationContext(),Curriculun.class));
+                startActivity(new Intent(getApplicationContext(),Main2Activity.class));
             }
         });
 
