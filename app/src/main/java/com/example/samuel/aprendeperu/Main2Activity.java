@@ -1,12 +1,15 @@
 package com.example.samuel.aprendeperu;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentManager;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -41,6 +44,7 @@ public class Main2Activity extends AppCompatActivity
     private RecyclerView mRecyclerView;
     private StaggeredGridLayoutManager mLayoutManager;
     private TextView tvNoMovies;
+    private CardView cardView;
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference mDatabaseReference = database.getReference();
 
@@ -87,6 +91,7 @@ public class Main2Activity extends AppCompatActivity
         mRecyclerView = (RecyclerView)
                 findViewById(R.id.my_recycler_view);
         tvNoMovies = (TextView) findViewById(R.id.tv_no_movies);
+        cardView = (CardView)findViewById(R.id.card_view);
 //scale animation to shrink floating actionbar
         /*shrinkAnim = new ScaleAnimation(1.15f, 0f, 1.15f, 0f,
                 Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF,
@@ -119,8 +124,11 @@ public class Main2Activity extends AppCompatActivity
 /*                        if(tvNoMovies.getVisibility()== View.VISIBLE){
                             tvNoMovies.setVisibility(View.GONE);
                         }*/
+
                         viewHolder.tViewAsignatura.setText(model.getAsignatura());
                         viewHolder.tViewCosto.setText("Precio : "+model.getCosto()+" S/.");
+                        
+
 
                         //viewHolder.ratingBar.setRating(model.get());
                        // Picasso.with(Main2Activity.this).load(model.get()).into(viewHolder.ivMoviePoster);
@@ -183,9 +191,30 @@ public class Main2Activity extends AppCompatActivity
             tViewCosto = (TextView) v.findViewById(R.id.tViewCosto);
             ratingBar = (RatingBar) v.findViewById(R.id.rating_bar);
             ivMoviePoster = (ImageView) v.findViewById(R.id.iv_movie_poster);
+            v.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Clases clase = new Clases();
+
+                  // Toast.makeText(Main2Activity.this,  clase.getAsignatura().toString(), Toast.LENGTH_SHORT).show();
+                    String dato = tViewCosto.getText().toString();
+                    Log.i("W4K","Click-" + dato);
+                    //Toast.makeText(this , "My First Service Started ",Toast.LENGTH_LONG).show();
+
+
+                    /*Intent intent = new Intent(v.getContext(),  Curriculun.class);
+                    v.getContext().startActivity(intent);*/
+                   // intent.putExtra("id_poliza",str);
+
+                }
+            });
+
         }
 
+
+
     }
+
 
     @Override
     public void onBackPressed() {
