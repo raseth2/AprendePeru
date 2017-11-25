@@ -1,11 +1,18 @@
 package com.example.samuel.aprendeperu;
 
+import android.app.Activity;
+
+import android.app.FragmentTransaction;
+import android.support.v4.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
+
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
@@ -26,6 +33,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.samuel.aprendeperu.Fragment.ClasesFragment;
+import com.example.samuel.aprendeperu.Fragment.DetalleClaseFragmento;
+import com.example.samuel.aprendeperu.Fragment.PerfilFragment;
 import com.example.samuel.aprendeperu.Fragment.ViewPerfilFragment;
 import com.example.samuel.aprendeperu.Referencias.Clases;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
@@ -45,6 +54,7 @@ public class Main2Activity extends AppCompatActivity
     private StaggeredGridLayoutManager mLayoutManager;
     private TextView tvNoMovies;
     private CardView cardView;
+    private Context context;
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference mDatabaseReference = database.getReference();
 
@@ -127,6 +137,8 @@ public class Main2Activity extends AppCompatActivity
 
                         viewHolder.tViewAsignatura.setText(model.getAsignatura());
                         viewHolder.tViewCosto.setText("Precio : "+model.getCosto()+" S/.");
+                        viewHolder.tIdUser.setText(model.getUserId());
+                        viewHolder.tIdCurso.setText(model.getUserId());
                         
 
 
@@ -182,7 +194,7 @@ public class Main2Activity extends AppCompatActivity
     }
     public static class MovieViewHolder extends RecyclerView.ViewHolder{
 
-        TextView tViewAsignatura,tViewCosto;
+        TextView tViewAsignatura,tViewCosto,tIdUser,tIdCurso;
         RatingBar ratingBar;
         ImageView ivMoviePoster;
         public MovieViewHolder(View v) {
@@ -191,21 +203,57 @@ public class Main2Activity extends AppCompatActivity
             tViewCosto = (TextView) v.findViewById(R.id.tViewCosto);
             ratingBar = (RatingBar) v.findViewById(R.id.rating_bar);
             ivMoviePoster = (ImageView) v.findViewById(R.id.iv_movie_poster);
+            tIdUser=(TextView)v.findViewById(R.id.tViewIdUser);
+            tIdCurso=(TextView)v.findViewById(R.id.tViewIdCurso);
             v.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Clases clase = new Clases();
-
+                    //Activity activity = (Activity)v.getContext();
+                    FragmentActivity activity = (FragmentActivity)v.getContext();
+                    FragmentManager manager = activity.getSupportFragmentManager();
                   // Toast.makeText(Main2Activity.this,  clase.getAsignatura().toString(), Toast.LENGTH_SHORT).show();
-                    String dato = tViewCosto.getText().toString();
+                    String dato = tIdUser.getText().toString();
                     Log.i("W4K","Click-" + dato);
                     //Toast.makeText(this , "My First Service Started ",Toast.LENGTH_LONG).show();
-
-
-                    /*Intent intent = new Intent(v.getContext(),  Curriculun.class);
+                    //Bundle bundle = new Bundle();
+                    /*Intent intent = new Intent(v.getContext(),  DetalleClaseFragmento.class);
+                    intent.putExtra("id", dato);
                     v.getContext().startActivity(intent);*/
                    // intent.putExtra("id_poliza",str);
 
+
+                    FragmentTransaction transection =activity.getFragmentManager().beginTransaction();
+                    DetalleClaseFragmento mfragment = new DetalleClaseFragmento();
+                    //using Bundle to send data
+                    Bundle bundle = new Bundle();
+                    bundle.putString("id", dato);
+                    mfragment.setArguments(bundle); //data being send to SecondFragment
+                    transection.replace(R.id.contenedor, mfragment);
+                    transection.isAddToBackStackAllowed();
+                    transection.addToBackStack(null);
+                    transection.commit();
+
+
+                   /*
+
+                    Fragment detalleClaseFragmento = new DetalleClaseFragmento();
+
+                    Bundle bundle = new Bundle();
+                    bundle.putString("id",dato);
+                    detalleClaseFragmento.setArguments(bundle);
+
+                    FragmentManager FM = activity.getSupportFragmentManager();
+                    FragmentTransaction FT = FM.beginTransaction();
+
+                    FT.replace(R.id.contenedor, detalleClaseFragmento);
+                    FT.addToBackStack(null);
+
+                    FT.commit();
+
+                    FragmentManager fragmentManager = activity.getSupportFragmentManager();
+                    fragmentManager.beginTransaction().replace(R.id.contenedor, new DetalleClaseFragmento()).commit();
+                    */
                 }
             });
 

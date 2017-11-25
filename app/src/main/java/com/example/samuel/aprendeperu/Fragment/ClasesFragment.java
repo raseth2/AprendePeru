@@ -70,8 +70,14 @@ public class ClasesFragment extends Fragment {
 //Creating a movie object with user defined variables
         Clases clases = new Clases(userId,Asignatura,Local,MaxAlumnos,Costos);
 //referring to movies node and setting the values from movie object to location
-        mDatabaseReference.child("Clases").child(categoria).push().setValue(clases);
+        String push = mDatabaseReference.push().getKey();
+
+        mDatabaseReference.child("Clases").child(categoria).child(push).setValue(clases);
+        mDatabaseReference.child("Persona").child(userId).child("Clases").child(Asignatura).child("ID").setValue(push);
+        mDatabaseReference.child("Persona").child(userId).child("Clases").child(Asignatura).child("Categoria").setValue(categoria);
+
         Toast.makeText(getActivity(), "Datos Cargados", Toast.LENGTH_SHORT).show();
+
     }
 
 
@@ -146,6 +152,8 @@ btn_save=(Button)inflate.findViewById(R.id.btnGuardar);
                         tLocal.getText().toString(),
                         tMaxAlumnos.getText().toString(),
                         tCosto.getText().toString());
+
+                getActivity().onBackPressed();
 
             }
         });

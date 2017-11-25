@@ -6,6 +6,7 @@ package com.example.samuel.aprendeperu.Referencias;
 
 public class Clases {
     private String UserId;
+    private String CursoId;
     private String Asignatura;
     private String Local;
     private String MaxAlumnos;
@@ -17,6 +18,7 @@ public class Clases {
     public Clases(String UserId,String Asignatura,String Local,String MaxAlumnos, String Costo){
 
         this.UserId = UserId;
+       // this.CursoId=CursoId;
         this.Asignatura = Asignatura;
         this.Local = Local;
         this.MaxAlumnos = MaxAlumnos;
@@ -29,6 +31,13 @@ public class Clases {
     public void setUserId(String UserId) {
         this.UserId = UserId;
     }
+
+   /* public String getCursoId() {
+        return CursoId;
+    }
+    public void setCursoId(String CursoId) {
+        this.CursoId = CursoId;
+    }*/
 
     public String getAsignatura() {
         return Asignatura;

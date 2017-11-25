@@ -49,6 +49,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     >
+
     <TextView
         android:id="@+id/tViewAsignatura"
         android:layout_width="wrap_content"
@@ -67,6 +68,20 @@
         android:text="Monto S/."
         android:textSize="12sp"
         android:textStyle="bold" />
+    <TextView
+        android:id="@+id/tViewIdUser"
+        android:layout_width="0dp"
+        android:gravity="left"
+        android:visibility="invisible"
+        android:text="dsffdsf"
+        android:layout_height="0dp" />
+    <TextView
+        android:id="@+id/tViewIdCurso"
+        android:layout_width="0dp"
+        android:gravity="left"
+        android:visibility="invisible"
+        android:text="dsffdsf"
+        android:layout_height="0dp" />
 </LinearLayout>
 
         </LinearLayout>
