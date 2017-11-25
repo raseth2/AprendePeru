@@ -42,7 +42,7 @@ public class ClasesFragment extends Fragment {
     Button btn_save, btn_Cargar;
     DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
 
-
+/*
     public void Guardar() {
         FirebaseUser user = mAuth.getCurrentUser();
 
@@ -62,7 +62,7 @@ public class ClasesFragment extends Fragment {
         Toast.makeText(getActivity(), "Datos Guardados", Toast.LENGTH_SHORT).show();
     }
 
-
+*/
     private void newClase(String userId, String Asignatura, String
             Local,String MaxAlumnos,String Costos) {
         FirebaseUser user = mAuth.getCurrentUser();
@@ -92,14 +92,11 @@ public void CargarDatos(){
         public void onDataChange(DataSnapshot snapshot) {
 
             try {
-               // categoria_spinner.setSelection(categoria);
                 tAsignatura.setText(snapshot.child("Asignatura").getValue().toString());
                 tLocal.setText(snapshot.child("Local").getValue().toString());
                 tMaxAlumnos.setText(snapshot.child("MaxAlumnos").getValue().toString());
                 tCosto.setText(snapshot.child("Costo").getValue().toString());
                 Toast.makeText(getActivity(), "Datos Cargados", Toast.LENGTH_SHORT).show();
-
-                // }
             }catch (Exception e){
                 e.printStackTrace();
             }
@@ -157,20 +154,6 @@ btn_save=(Button)inflate.findViewById(R.id.btnGuardar);
 
             }
         });
-
-      /*  fecha_text = (TextView) inflate.findViewById(R.id.fecha_ejemplo_text);
-
-        fecha_text.setOnClickListener(
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        DialogFragment picker = new DatePickerFragment();
-                        picker.show(getFragmentManager(), "datePicker");
-
-                    }
-                }
-        );*/
-        // Inflate the layout for this fragment
         return inflate;
     }
 

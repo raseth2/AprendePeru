@@ -1,7 +1,5 @@
 package com.example.samuel.aprendeperu;
 
-import android.app.Activity;
-
 import android.app.FragmentTransaction;
 import android.support.v4.app.Fragment;
 import android.content.Context;
@@ -34,7 +32,6 @@ import android.widget.Toast;
 
 import com.example.samuel.aprendeperu.Fragment.ClasesFragment;
 import com.example.samuel.aprendeperu.Fragment.DetalleClaseFragmento;
-import com.example.samuel.aprendeperu.Fragment.PerfilFragment;
 import com.example.samuel.aprendeperu.Fragment.ViewPerfilFragment;
 import com.example.samuel.aprendeperu.Referencias.Clases;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
@@ -208,52 +205,28 @@ public class Main2Activity extends AppCompatActivity
             v.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Clases clase = new Clases();
-                    //Activity activity = (Activity)v.getContext();
                     FragmentActivity activity = (FragmentActivity)v.getContext();
                     FragmentManager manager = activity.getSupportFragmentManager();
-                  // Toast.makeText(Main2Activity.this,  clase.getAsignatura().toString(), Toast.LENGTH_SHORT).show();
-                    String dato = tIdUser.getText().toString();
-                    Log.i("W4K","Click-" + dato);
-                    //Toast.makeText(this , "My First Service Started ",Toast.LENGTH_LONG).show();
-                    //Bundle bundle = new Bundle();
-                    /*Intent intent = new Intent(v.getContext(),  DetalleClaseFragmento.class);
-                    intent.putExtra("id", dato);
-                    v.getContext().startActivity(intent);*/
-                   // intent.putExtra("id_poliza",str);
 
+                    String dato = tIdUser.getText().toString();
+                    String nombreCurso = tViewAsignatura.getText().toString();
+                    String Precio = tViewCosto.getText().toString();
+
+                    Log.i("W4K","Click-" + dato);
 
                     FragmentTransaction transection =activity.getFragmentManager().beginTransaction();
                     DetalleClaseFragmento mfragment = new DetalleClaseFragmento();
                     //using Bundle to send data
                     Bundle bundle = new Bundle();
                     bundle.putString("id", dato);
+                    bundle.putString("Curso",nombreCurso);
+                    bundle.putString("Precio",Precio);
                     mfragment.setArguments(bundle); //data being send to SecondFragment
                     transection.replace(R.id.contenedor, mfragment);
                     transection.isAddToBackStackAllowed();
                     transection.addToBackStack(null);
                     transection.commit();
 
-
-                   /*
-
-                    Fragment detalleClaseFragmento = new DetalleClaseFragmento();
-
-                    Bundle bundle = new Bundle();
-                    bundle.putString("id",dato);
-                    detalleClaseFragmento.setArguments(bundle);
-
-                    FragmentManager FM = activity.getSupportFragmentManager();
-                    FragmentTransaction FT = FM.beginTransaction();
-
-                    FT.replace(R.id.contenedor, detalleClaseFragmento);
-                    FT.addToBackStack(null);
-
-                    FT.commit();
-
-                    FragmentManager fragmentManager = activity.getSupportFragmentManager();
-                    fragmentManager.beginTransaction().replace(R.id.contenedor, new DetalleClaseFragmento()).commit();
-                    */
                 }
             });
 
