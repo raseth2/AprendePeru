@@ -9,18 +9,23 @@ public class Clases {
     private String CursoId;
     private String Asignatura;
     private String Local;
+    private String Horario;
+    private String Descripcion;
+    private String Nivel;
     private String MaxAlumnos;
     private String Costo;
 
 
     public Clases(){
     }
-    public Clases(String UserId,String Asignatura,String Local,String MaxAlumnos, String Costo){
+    public Clases(String UserId,String Asignatura,String Local,String Descripcion,String MaxAlumnos, String Costo){
 
         this.UserId = UserId;
+        this.CursoId = CursoId;
        // this.CursoId=CursoId;
         this.Asignatura = Asignatura;
         this.Local = Local;
+        this.Descripcion=Descripcion;
         this.MaxAlumnos = MaxAlumnos;
         this.Costo = Costo;
        // this.movieRating = movieRating;
@@ -32,12 +37,25 @@ public class Clases {
         this.UserId = UserId;
     }
 
+    public String getCursoId() {
+        return CursoId;
+    }
+    public void setCursoId(String CursoId) {
+        this.CursoId = CursoId;
+    }
    /* public String getCursoId() {
         return CursoId;
     }
     public void setCursoId(String CursoId) {
         this.CursoId = CursoId;
     }*/
+   public String getDescripcion() {
+       return Descripcion;
+   }
+    public void setDescripcion(String Descripcion) {
+        this.Descripcion = Descripcion;
+    }
+
 
     public String getAsignatura() {
         return Asignatura;

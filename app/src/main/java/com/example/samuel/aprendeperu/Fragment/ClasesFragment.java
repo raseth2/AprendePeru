@@ -27,6 +27,10 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
 import static com.example.samuel.aprendeperu.R.layout.user;
 
 /**
@@ -37,7 +41,7 @@ public class ClasesFragment extends Fragment {
     private DatabaseReference mDatabaseReference;
 
     Spinner categoria_spinner;
-    EditText tAsignatura,tLocal,tMaxAlumnos,tCosto;
+    EditText tAsignatura,tLocal,tMaxAlumnos,tCosto,tDescripcion;
     TextView fecha_text;
     Button btn_save, btn_Cargar;
     DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
@@ -64,15 +68,26 @@ public class ClasesFragment extends Fragment {
 
 */
     private void newClase(String userId, String Asignatura, String
-            Local,String MaxAlumnos,String Costos) {
+            Local,String Descripcion,String MaxAlumnos,String Costos) {
         FirebaseUser user = mAuth.getCurrentUser();
         String categoria = categoria_spinner.getSelectedItem().toString();
 //Creating a movie object with user defined variables
-        Clases clases = new Clases(userId,Asignatura,Local,MaxAlumnos,Costos);
+        Clases clases = new Clases(userId,Asignatura,Local,Descripcion,MaxAlumnos,Costos);
 //referring to movies node and setting the values from movie object to location
         String push = mDatabaseReference.push().getKey();
 
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss", Locale.getDefault());
+        Date date = new Date();
+
+        /*DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        Date date = new Date();
+        return dateFormat.format(date);*/
+
+        String fecha = dateFormat.format(date);
+
         mDatabaseReference.child("Clases").child(categoria).child(push).setValue(clases);
+        mDatabaseReference.child("Clases").child(categoria).child(push).child("Fecha").setValue(fecha);
+        mDatabaseReference.child("Clases").child(categoria).child(push).child("CursoId").setValue(push);
         mDatabaseReference.child("Persona").child(userId).child("Clases").child(Asignatura).child("ID").setValue(push);
         mDatabaseReference.child("Persona").child(userId).child("Clases").child(Asignatura).child("Categoria").setValue(categoria);
 
@@ -131,14 +146,16 @@ public void CargarDatos(){
         tLocal=(EditText) inflate.findViewById(R.id.txtLocal);
         tMaxAlumnos=(EditText) inflate.findViewById(R.id.txtMaxAlumnos);
         tCosto=(EditText) inflate.findViewById(R.id.txtCosto);
+        tDescripcion=(EditText)inflate.findViewById(R.id.txtDescripcion);
+
 btn_save=(Button)inflate.findViewById(R.id.btnGuardar);
-        btn_Cargar=(Button)inflate.findViewById(R.id.btnCargar);
+      /* btn_Cargar=(Button)inflate.findViewById(R.id.btnCargar);
         btn_Cargar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 CargarDatos();
             }
-        });
+        });*/
         btn_save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -147,8 +164,10 @@ btn_save=(Button)inflate.findViewById(R.id.btnGuardar);
                // Guardar();
                 newClase(user.getUid(),tAsignatura.getText().toString().trim(),
                         tLocal.getText().toString(),
+                        tDescripcion.getText().toString(),
                         tMaxAlumnos.getText().toString(),
                         tCosto.getText().toString());
+
 
                 getActivity().onBackPressed();
 

@@ -1,7 +1,6 @@
 package com.example.samuel.aprendeperu;
 
 import android.app.FragmentTransaction;
-import android.support.v4.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -41,6 +40,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 public class Main2Activity extends AppCompatActivity
@@ -112,38 +112,54 @@ public class Main2Activity extends AppCompatActivity
         mRecyclerView.setLayoutManager(mLayoutManager);
 //Say Hello to our new FirebaseUI android Element, i.e., FirebaseRecyclerAdapter
         mAuth = FirebaseAuth.getInstance();
+
         FirebaseUser user = mAuth.getCurrentUser();
+        //DatabaseReference databaseReference = ref.child("Clases").child("Artes").getRef();
+        final Query query = ref.child("Clases").child("Artes");
+        query.getRef().orderByChild("Fecha").startAt("20171127040848").endAt("20171127040911").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+                try {
+                        FirebaseRecyclerAdapter<Clases,MovieViewHolder> adapter = new
+                                FirebaseRecyclerAdapter<Clases, MovieViewHolder>(
+                                        Clases.class,
+                                        R.layout.card_view_main2,
+                                        MovieViewHolder.class,
+                                        snapshot.getRef()
+
+                                        //  mDatabaseReference.child("Clases").child("Artes").getRef().orderByKey()
 
 
-        FirebaseRecyclerAdapter<Clases,MovieViewHolder> adapter = new
-                FirebaseRecyclerAdapter<Clases, MovieViewHolder>(
-                        Clases.class,
-                        R.layout.card_view_main2,
-                        MovieViewHolder.class,
 
-                        mDatabaseReference.child("Clases").child("Artes").getRef()
+                                ) {
+                                    @Override
 
-                ) {
-                    @Override
+                                    protected void populateViewHolder(MovieViewHolder viewHolder, Clases
+                                            model, int position) {
 
-                    protected void populateViewHolder(MovieViewHolder viewHolder, Clases
-                            model, int position) {
-/*                        if(tvNoMovies.getVisibility()== View.VISIBLE){
-                            tvNoMovies.setVisibility(View.GONE);
-                        }*/
-
-                        viewHolder.tViewAsignatura.setText(model.getAsignatura());
-                        viewHolder.tViewCosto.setText("Precio : "+model.getCosto()+" S/.");
-                        viewHolder.tIdUser.setText(model.getUserId());
-                        viewHolder.tIdCurso.setText(model.getUserId());
-                        
+                                        viewHolder.tViewAsignatura.setText(model.getAsignatura());
+                                        viewHolder.tViewCosto.setText(" S/."+model.getCosto());
+                                        viewHolder.tIdUser.setText(model.getUserId());
+                                        viewHolder.tIdCurso.setText(model.getCursoId());
+                                    }
+                                };
+                        mRecyclerView.setAdapter(adapter);
 
 
-                        //viewHolder.ratingBar.setRating(model.get());
-                       // Picasso.with(Main2Activity.this).load(model.get()).into(viewHolder.ivMoviePoster);
-                    }
-                };
-        mRecyclerView.setAdapter(adapter);
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+            //fin tablapersona
+        });
+
+
 
 
         if(mAuth.getCurrentUser() == null)
@@ -191,7 +207,7 @@ public class Main2Activity extends AppCompatActivity
     }
     public static class MovieViewHolder extends RecyclerView.ViewHolder{
 
-        TextView tViewAsignatura,tViewCosto,tIdUser,tIdCurso;
+        TextView tViewCurso,tViewAsignatura,tViewCosto,tIdUser,tIdCurso;
         RatingBar ratingBar;
         ImageView ivMoviePoster;
         public MovieViewHolder(View v) {
@@ -200,25 +216,28 @@ public class Main2Activity extends AppCompatActivity
             tViewCosto = (TextView) v.findViewById(R.id.tViewCosto);
             ratingBar = (RatingBar) v.findViewById(R.id.rating_bar);
             ivMoviePoster = (ImageView) v.findViewById(R.id.iv_movie_poster);
+
             tIdUser=(TextView)v.findViewById(R.id.tViewIdUser);
             tIdCurso=(TextView)v.findViewById(R.id.tViewIdCurso);
             v.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     FragmentActivity activity = (FragmentActivity)v.getContext();
-                    FragmentManager manager = activity.getSupportFragmentManager();
+                   // FragmentManager manager = activity.getSupportFragmentManager();
 
-                    String dato = tIdUser.getText().toString();
+                    String idUser = tIdUser.getText().toString();
                     String nombreCurso = tViewAsignatura.getText().toString();
                     String Precio = tViewCosto.getText().toString();
+                    String IdCurso = tIdCurso.getText().toString();
 
-                    Log.i("W4K","Click-" + dato);
+                    Log.i("W4K","Click-" + idUser);
 
                     FragmentTransaction transection =activity.getFragmentManager().beginTransaction();
                     DetalleClaseFragmento mfragment = new DetalleClaseFragmento();
                     //using Bundle to send data
                     Bundle bundle = new Bundle();
-                    bundle.putString("id", dato);
+                    bundle.putString("id", idUser);
+                    bundle.putString("idCurso", IdCurso);
                     bundle.putString("Curso",nombreCurso);
                     bundle.putString("Precio",Precio);
                     mfragment.setArguments(bundle); //data being send to SecondFragment

@@ -64,10 +64,21 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
                 android:hint="Asignatura de Enseñanza"
-
-                android:inputType="textPersonName"
+                android:inputType="textCapWords"
                 android:padding="10dp"
                 android:singleLine="true" />
+
+            <EditText
+                android:id="@+id/txtDescripcion"
+                android:layout_width="match_parent"
+                android:layout_height="141dp"
+                android:layout_marginBottom="10dp"
+                android:lines="8"
+                android:hint="Descripcion o Temas a Tratar"
+                android:inputType="textCapWords|textMultiLine"
+                android:padding="10dp"
+                android:selectAllOnFocus="false"
+                />
 
 
 
@@ -77,7 +88,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
                 android:hint="Local de Enseñanza"
-                android:inputType="textPersonName"
+                android:inputType="textCapWords"
                 android:padding="10dp"
                 android:singleLine="true" />
 
@@ -101,17 +112,6 @@
                 android:padding="10dp"
                 android:singleLine="true" />
 
-            <Button
-
-                android:id="@+id/btnCargar"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="10dip"
-                android:background="@color/bg_login"
-                android:text="Cargar Datos"
-                android:textColor="@color/white"
-                android:textSize="20dp" />
 
             <Button
 

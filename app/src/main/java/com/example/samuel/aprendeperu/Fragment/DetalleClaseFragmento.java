@@ -4,12 +4,15 @@ package com.example.samuel.aprendeperu.Fragment;
 
 
 import android.app.Fragment;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.samuel.aprendeperu.R;
@@ -25,7 +28,8 @@ import com.google.firebase.database.ValueEventListener;
  */
 public class DetalleClaseFragmento extends Fragment {
     DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
-TextView textView,tCurso,tCosto,tNombre;
+private TextView textView,tCurso,tCosto,tNombre,tDescripcion;
+Button btnTelefono;
 
 
     public void CargarDatos(){
@@ -33,33 +37,42 @@ TextView textView,tCurso,tCosto,tNombre;
         final String nombreCurso=String.valueOf(bundle.getString("Curso"));
         final String Precio=String.valueOf(bundle.getString("Precio"));
 
-        DatabaseReference refPersona = ref.child("Persona").child(String.valueOf(bundle.getString("id")));
+        DatabaseReference refCurso = ref.child("Clases").child("Artes").child(String.valueOf(bundle.getString("idCurso")));
 
-
-
-        //tabla PErsona
-        refPersona.addValueEventListener(new ValueEventListener() {
+        refCurso.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
-
                 try {
-                    // if (snapshot.getValue() != null){
-                    //String value = snapshot.getValue(String.class);
-                    tNombre.setText("Docente : " + snapshot.child("NombrePersona").getValue().toString());
-                   // tApellidos.setText("APELLIDOS : "+snapshot.child("ApellidoPersona").getValue().toString());
-                    //String newid = snapshot.child("Clases").child(nombreCurso).child("ID").getValue().toString();
-                   tCurso.setText(nombreCurso);
-                   tCosto.setText(Precio);
-                   /* tEmail.setText("EMAIL : "+snapshot.child("Email").getValue().toString());
-                    tFechaNacimiento.setText("FECHA DE NACIMIENTO : "+snapshot.child("FechaNacimientoPersona").getValue().toString());
-                    tDireccion.setText("DIRECCION : "+snapshot.child("DireccionPersona").getValue().toString());
-*/
-                    // }
+                    tDescripcion.setText(snapshot.child("descripcion").getValue().toString());
+
                 }catch (Exception e){
                     e.printStackTrace();
                 }
 
             }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+            //fin tabla
+        });
+
+        DatabaseReference refPersona = ref.child("Persona").child(String.valueOf(bundle.getString("id")));
+            //tabla PErsona
+        refPersona.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot snapshot) {
+                    try {
+                        tNombre.setText("Docente : " + snapshot.child("NombrePersona").getValue().toString());
+                        tCurso.setText(nombreCurso);
+                        tCosto.setText(Precio);
+                        btnTelefono.setText(snapshot.child("Telefono").getValue().toString());
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }
+
+                }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
@@ -98,11 +111,23 @@ TextView textView,tCurso,tCosto,tNombre;
         tCurso = (TextView)inflate.findViewById(R.id.tViewCurso);
         tCosto = (TextView)inflate.findViewById(R.id.tViewCosto);
         tNombre = (TextView)inflate.findViewById(R.id.tViewUsuario);
-
+        btnTelefono=(Button)inflate.findViewById(R.id.btnNumero);
+        tDescripcion=(TextView)inflate.findViewById(R.id.tViewDescripcion);
 
         Bundle bundle = getArguments();
-        textView.setText(String.valueOf(bundle.getString("id")));
+        //haciendo la prueba bundle
+       // textView.setText(String.valueOf(bundle.getString("id")));
+        textView.setText(String.valueOf(bundle.getString("idCurso")));
         CargarDatos();
+
+        btnTelefono.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Uri number = Uri.parse("tel:"+btnTelefono.getText());
+                Intent callIntent = new Intent(Intent.ACTION_DIAL,number);
+                startActivity(callIntent);
+            }
+        });
         return inflate;
     }
 
