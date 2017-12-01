@@ -97,6 +97,7 @@
             android:layout_gravity="center"
             android:textColor="@color/white"
             android:background="@color/bg_login"
+
             />
     </LinearLayout>
 

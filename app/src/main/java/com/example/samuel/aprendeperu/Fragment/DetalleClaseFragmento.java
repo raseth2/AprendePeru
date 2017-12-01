@@ -4,11 +4,14 @@ package com.example.samuel.aprendeperu.Fragment;
 
 
 import android.app.Fragment;
+
+import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 
 
+import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +19,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.samuel.aprendeperu.R;
+import com.example.samuel.aprendeperu.chat.ChatActivityFragment;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -29,7 +33,7 @@ import com.google.firebase.database.ValueEventListener;
 public class DetalleClaseFragmento extends Fragment {
     DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
 private TextView textView,tCurso,tCosto,tNombre,tDescripcion;
-Button btnTelefono;
+Button btnTelefono,btnChat;
 
 
     public void CargarDatos(){
@@ -113,12 +117,37 @@ Button btnTelefono;
         tNombre = (TextView)inflate.findViewById(R.id.tViewUsuario);
         btnTelefono=(Button)inflate.findViewById(R.id.btnNumero);
         tDescripcion=(TextView)inflate.findViewById(R.id.tViewDescripcion);
+        btnChat=(Button)inflate.findViewById(R.id.btnChat);
 
         Bundle bundle = getArguments();
         //haciendo la prueba bundle
        // textView.setText(String.valueOf(bundle.getString("id")));
-        textView.setText(String.valueOf(bundle.getString("idCurso")));
+        textView.setText(String.valueOf(bundle.getString("id")));
         CargarDatos();
+
+        final String nombreCurso=String.valueOf(bundle.getString("Curso"));
+        final String Precio=String.valueOf(bundle.getString("Precio"));
+        final String idpersona=String.valueOf(bundle.getString("id"));
+
+        btnChat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentActivity activity = (FragmentActivity)v.getContext();
+                FragmentTransaction transection =activity.getFragmentManager().beginTransaction();
+                ChatActivityFragment mfragment = new ChatActivityFragment();
+                //using Bundle to send data
+                Bundle bundle = new Bundle();
+                bundle.putString("id", idpersona);
+               /* bundle.putString("idCurso", IdCurso);
+                bundle.putString("Curso",nombreCurso);
+                bundle.putString("Precio",Precio);*/
+                mfragment.setArguments(bundle); //data being send to SecondFragment
+                transection.replace(R.id.contenedor, mfragment);
+                transection.isAddToBackStackAllowed();
+                transection.addToBackStack(null);
+                transection.commit();
+            }
+        });
 
         btnTelefono.setOnClickListener(new View.OnClickListener() {
             @Override

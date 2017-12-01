@@ -33,6 +33,7 @@ import com.example.samuel.aprendeperu.Fragment.ClasesFragment;
 import com.example.samuel.aprendeperu.Fragment.DetalleClaseFragmento;
 import com.example.samuel.aprendeperu.Fragment.ViewPerfilFragment;
 import com.example.samuel.aprendeperu.Referencias.Clases;
+import com.example.samuel.aprendeperu.chat.ChatActivityFragment;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -169,14 +170,14 @@ public class Main2Activity extends AppCompatActivity
             startActivity(new Intent(getApplicationContext(),MainActivity.class));
         }
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+       /* FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
-        });
+        });*/
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -219,6 +220,7 @@ public class Main2Activity extends AppCompatActivity
 
             tIdUser=(TextView)v.findViewById(R.id.tViewIdUser);
             tIdCurso=(TextView)v.findViewById(R.id.tViewIdCurso);
+
             v.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -304,7 +306,7 @@ public class Main2Activity extends AppCompatActivity
 
 
         } else if (id == R.id.nav_slideshow) {
-            //fragmentManager.beginTransaction().replace(R.id.contenedor, new SlideshowFragment()).commit();
+            //fragmentManager.beginTransaction().replace(R.id.contenedor, new ChatActivityFragment()).commit();
         } else if (id == R.id.nav_manage) {
            // fragmentManager.beginTransaction().replace(R.id.contenedor, new ToolsFragment()).commit();
         } else if (id == R.id.nav_salir) {
